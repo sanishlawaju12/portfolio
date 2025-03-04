@@ -6,6 +6,7 @@ import "../../styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { House, Rss, Menu, Images } from "lucide-react";
 import Link from "next/link";
+import { ModeToggle } from "@/components/dark-theme";
 
 export default function RootLayout({
   children,
@@ -75,6 +76,7 @@ export default function RootLayout({
                   >
                     <Images className="text-2xl" />
                   </Link>
+                  <ModeToggle />
                 </div>
 
                 {/* Right Sidebar */}
@@ -106,6 +108,7 @@ export default function RootLayout({
                   >
                     <Images className="text-2xl" />
                   </Link>
+                  <ModeToggle />
                 </div>
               </div>
             </>

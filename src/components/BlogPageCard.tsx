@@ -35,19 +35,6 @@ const BlogPageCard = ({
         </Link>
       </div>
     </div>
-
-    {/* Buttons Section */}
-    <div className="flex gap-4 p-4">
-      <button className="text-red-500 flex items-center gap-1">
-        <Heart /> <span>Like</span>
-      </button>
-      <button className="text-green-500 flex items-center gap-1">
-        <MessageCircle /> <span>Comment</span>
-      </button>
-      <button className="text-blue-500 flex items-center gap-1">
-        <Share2 /> <span>Share</span>
-      </button>
-    </div>
   </div>
 );
 

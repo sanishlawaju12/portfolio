@@ -7,8 +7,7 @@ import { Badge } from "@/components/ui/badge";
 async function fetchBlogs() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/)`
-    );
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/`);
     if (!res.ok) {
       throw new Error("Failed to fetch blog");
     }
@@ -21,7 +20,9 @@ async function fetchBlogs() {
 
 async function fetchPopularBlogs() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch popular blog");
     }
@@ -34,7 +35,9 @@ async function fetchPopularBlogs() {
 
 async function fetchTags() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-tag/`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-tag/`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch blog tags");
     }

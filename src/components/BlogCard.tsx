@@ -28,18 +28,6 @@ const BlogCard = ({
         </Link>
       </div>
     </div>
-    {/* Button container - Horizontally on mobile, vertically on larger screens */}
-    <div className="flex sm:flex-col flex-row justify-between p-4 sm:ml-auto w-full sm:w-auto">
-      <button className="text-red-500 flex items-center gap-1">
-        <Heart /> <span className="sm:hidden">Like</span>
-      </button>
-      <button className="text-green-500 flex items-center gap-1">
-        <MessageCircle /> <span className="sm:hidden">Comment</span>
-      </button>
-      <button className="text-blue-500 flex items-center gap-1">
-        <Share2 /> <span className="sm:hidden">Share</span>
-      </button>
-    </div>
   </div>
 );
 

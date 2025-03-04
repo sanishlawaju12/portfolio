@@ -18,7 +18,9 @@ import {
 
 async function getBlogs() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/`
+    );
     if (!res.ok) {
       throw new Error("Failed to get blogs");
     }
@@ -31,7 +33,9 @@ async function getBlogs() {
 
 async function getPopularBlogs() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch popular blog");
     }
@@ -74,42 +78,58 @@ export default async function HomePage() {
           <span className="text-cyan-500">अर्पना</span> कोजु
         </h1>
         <div className="flex gap-3 justify-center items-center">
-          <button className="text-blue-500 text-2xl hover:scale-110 transition-transform duration-300">
-            <CiLinkedin />
-          </button>
-          <Separator
-            className="h-5 w-[1px] bg-gray-400"
-            aria-orientation="vertical"
-          />
-          <button className="text-red-500 text-2xl hover:scale-110 transition-transform duration-300">
-            <CiInstagram />
-          </button>
-          <Separator
-            className="h-5 w-[1px] bg-gray-400"
-            aria-orientation="vertical"
-          />
-          <Button
-            className="hover:scale-110 transition-transform duration-300 rounded-full px-2"
-            variant="outline"
+          <Link
+            href="https://www.linkedin.com/in/arpana-koju-a90724310/"
+            className="text-blue-500 text-2xl hover:scale-110 transition-transform duration-300"
           >
-            <small className="flex gap-1 items-center">
-              <ArrowDownToLine /> My Resume
-            </small>
-          </Button>
+            <CiLinkedin />
+          </Link>
           <Separator
             className="h-5 w-[1px] bg-gray-400"
             aria-orientation="vertical"
           />
-          <button className="text-blue-500 text-2xl hover:scale-110 transition-transform duration-300">
+          <Link
+            href="https://www.instagram.com/arpanakoju/"
+            className="text-red-500 text-2xl hover:scale-110 transition-transform duration-300"
+          >
+            <CiInstagram />
+          </Link>
+          <Separator
+            className="h-5 w-[1px] bg-gray-400"
+            aria-orientation="vertical"
+          />
+          <a href="/arpanacv.pdf" download="Arpana_Koju_CV.pdf">
+            <Button
+              className="hover:scale-110 transition-transform duration-300 rounded-full px-3"
+              variant="outline"
+              size="sm"
+              aria-label="Download My Resume"
+            >
+              <small className="flex gap-1 items-center">
+                <ArrowDownToLine size={16} /> My Resume
+              </small>
+            </Button>
+          </a>
+          <Separator
+            className="h-5 w-[1px] bg-gray-400"
+            aria-orientation="vertical"
+          />
+          <Link
+            href="https://www.facebook.com/arpana.koju.5"
+            className="text-blue-500 text-2xl hover:scale-110 transition-transform duration-300"
+          >
             <CiFacebook />
-          </button>
+          </Link>
           <Separator
             className="h-5 w-[1px] bg-gray-400"
             aria-orientation="vertical"
           />
-          <button className="text-red-500 text-2xl hover:scale-110 transition-transform duration-300">
+          <Link
+            href="https://www.youtube.com/@arpanakoju4765"
+            className="text-red-500 text-2xl hover:scale-110 transition-transform duration-300"
+          >
             <CiYoutube />
-          </button>
+          </Link>
         </div>
       </div>
 
