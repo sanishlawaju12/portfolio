@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { Separator } from "@/components/ui/separator";
 import BlogPageCard from "@/components/BlogPageCard";
 import Link from "next/link";

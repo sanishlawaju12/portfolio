@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { Separator } from "@/components/ui/separator";
 
 export default function GalleryPage() {

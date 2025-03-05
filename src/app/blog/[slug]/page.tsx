@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { notFound } from "next/navigation";
 
 // Interface to define the shape of the blog data

@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ArrowDownToLine, Heart, MessageCircle, Share2 } from "lucide-react";
