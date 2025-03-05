@@ -7,13 +7,11 @@ interface Blog {
   body: string;
 }
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function BlogDetail({ params }: PageProps) {
+export default async function BlogDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { slug } = params;
 
   try {
