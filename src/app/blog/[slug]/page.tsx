@@ -1,7 +1,5 @@
-export const runtime = 'edge';
 import { notFound } from "next/navigation";
 
-// Interface to define the shape of the blog data
 interface Blog {
   slug: string;
   title: string;
@@ -9,21 +7,26 @@ interface Blog {
   body: string;
 }
 
-// BlogDetail Component (Server Component in App Router)
-export default async function BlogDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  // Await the params to ensure the dynamic routing works
-  const { slug } = await params;
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function BlogDetail({ params }: PageProps) {
+  const { slug } = params;
 
   try {
-    // Fetch blog data based on the slug
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/${slug}/`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/${slug}/`
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch blog data: ${res.statusText}`);
+    }
+
     const blogData: Blog = await res.json();
 
-    // If no blog data found, return 404-like state
     if (!blogData) {
       return notFound();
     }
