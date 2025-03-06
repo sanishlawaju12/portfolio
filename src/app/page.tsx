@@ -192,6 +192,8 @@ export default async function HomePage() {
                           src={item.image}
                           alt={`Gallery Image ${index + 1}`}
                           className="w-full h-[300px] object-cover rounded-lg"
+                          width={600}
+                          height={400}
                         />
                       </Card>
                     </div>
@@ -232,8 +234,10 @@ export default async function HomePage() {
             {/* About Me Section */}
             <Image
               className="w-full h-full object-cover"
-              src="./arpanakoju.jpg"
+              src="/arpanakoju.jpg"
               alt="About Me"
+              width={600}
+              height={400}
             />
             <div className="p-4">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">

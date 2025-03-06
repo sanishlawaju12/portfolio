@@ -2,7 +2,6 @@
 export const runtime = "edge";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 // Define the expected type for blog data
 interface Blog {
@@ -37,8 +36,21 @@ export default function BlogDetail() {
     }
   }, [params?.slug]);
 
-  if (!params?.slug || !blogData) {
+  if (!params?.slug) {
     return <p>Loading...</p>;
+  }
+
+  if (blogData === null) {
+    return (
+      <div className="flex flex-col items-center px-4 mt-24">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600">
+          Blog Not Found
+        </h1>
+        <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-800 dark:text-white">
+          The blog you're looking for doesn't exist or has been removed.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -49,7 +61,7 @@ export default function BlogDetail() {
         </h1>
 
         {blogData.image && (
-          <Image
+          <img
             src={blogData.image}
             alt={blogData.title}
             className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-lg mt-4"
