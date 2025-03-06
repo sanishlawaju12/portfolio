@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime = "edge";
 import { Separator } from "@/components/ui/separator";
 import BlogPageCard from "@/components/BlogPageCard";
 import Link from "next/link";
@@ -7,7 +7,9 @@ import { Badge } from "@/components/ui/badge";
 
 async function fetchBlogs() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch blog");
     }
@@ -20,7 +22,9 @@ async function fetchBlogs() {
 
 async function fetchTags() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-tag/`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-tag/`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch blog tags");
     }
@@ -33,7 +37,9 @@ async function fetchTags() {
 
 async function fetchPopularBlogs() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`
+    );
     if (!res.ok) {
       throw new Error("Failed to fetch popular blog");
     }
@@ -64,30 +70,6 @@ export default async function BlogCategoryPage() {
   const popularBlogs = await fetchPopularBlogs();
   const tags = await fetchTags();
   const categories = await fetchCategories();
-
-  const popularBlogPosts = [
-    {
-      slug: "future-of-tech",
-      title: "The Future of Tech",
-      description:
-        "Discover how technology is shaping the future and transforming the way we live and work.",
-      image: "/blog-img.jpg",
-    },
-    {
-      slug: "exploring-ai",
-      title: "Exploring Artificial Intelligence",
-      description:
-        "AI is changing industries worldwide. Learn about the latest advancements in AI and how they impact our daily lives.",
-      image: "/ai-blog.jpg",
-    },
-    {
-      slug: "web-development-trends",
-      title: "Web Development Trends in 2025",
-      description:
-        "Stay ahead with the latest web development trends, frameworks, and best practices for building modern applications.",
-      image: "/web-dev.jpg",
-    },
-  ];
 
   return (
     <div className="flex flex-col items-center px-4 mt-12">

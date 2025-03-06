@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, MessageCircle, Share2 } from "lucide-react";
+import Image from "next/image";
 
 const BlogCard = ({
   slug,
@@ -13,7 +13,11 @@ const BlogCard = ({
   image: string;
 }) => (
   <div className="flex flex-col sm:flex-row bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
-    <img className="w-full sm:w-40 h-40 object-cover" src={image} alt={title} />
+    <Image
+      className="w-full sm:w-40 h-40 object-cover"
+      src={image}
+      alt={title}
+    />
     <div className="p-4 flex-1">
       <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
         {title}

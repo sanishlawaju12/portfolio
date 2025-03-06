@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const PopularBlogCard = ({
   slug,
@@ -15,7 +16,7 @@ const PopularBlogCard = ({
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <Link href={`/blog/${slug}`}>
-        <img
+        <Image
           src={imageUrl}
           alt={title}
           className="w-full h-16 object-cover transition-transform duration-300 group-hover:scale-105"

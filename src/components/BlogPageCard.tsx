@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, MessageCircle, Share2 } from "lucide-react";
+import Image from "next/image";
 
 const BlogPageCard = ({
   slug,
@@ -14,7 +14,7 @@ const BlogPageCard = ({
 }) => (
   <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
     {/* Image Section */}
-    <img
+    <Image
       className="w-full h-[200px] sm:h-[200px] md:h-[300px] object-cover"
       src={image}
       alt={title}

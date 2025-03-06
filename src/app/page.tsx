@@ -1,20 +1,19 @@
-export const runtime = 'edge';
+export const runtime = "edge";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { ArrowDownToLine, Heart, MessageCircle, Share2 } from "lucide-react";
+import { ArrowDownToLine } from "lucide-react";
 import { CiLinkedin, CiInstagram, CiFacebook, CiYoutube } from "react-icons/ci";
 import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import PopularBlogCard from "@/components/PopularBlogCard";
 import * as React from "react";
+import Image from "next/image";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 async function getBlogs() {
@@ -189,7 +188,7 @@ export default async function HomePage() {
                   >
                     <div className="">
                       <Card>
-                        <img
+                        <Image
                           src={item.image}
                           alt={`Gallery Image ${index + 1}`}
                           className="w-full h-[300px] object-cover rounded-lg"
@@ -231,7 +230,7 @@ export default async function HomePage() {
 
           <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mt-6">
             {/* About Me Section */}
-            <img
+            <Image
               className="w-full h-full object-cover"
               src="./arpanakoju.jpg"
               alt="About Me"

@@ -1,5 +1,6 @@
-export const runtime = 'edge';
+export const runtime = "edge";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 export default function GalleryPage() {
   const Gallery = [
@@ -47,7 +48,7 @@ export default function GalleryPage() {
               key={index}
               className="w-full h-64 rounded-lg overflow-hidden shadow-lg"
             >
-              <img
+              <Image
                 src={item.image}
                 alt={`Gallery Image ${index + 1}`}
                 className="w-full h-full object-cover"
