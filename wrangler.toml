@@ -1,0 +1,9 @@
+main = ".open-next/worker.js"
+name = "portfolio"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
+
+[[kv_namespaces]]
+binding = "NEXT_CACHE_WORKERS_KV_v2"
+id = "41833b07645f4755b3d8aaeede888326"
