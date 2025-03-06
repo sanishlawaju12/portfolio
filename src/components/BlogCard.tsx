@@ -17,6 +17,8 @@ const BlogCard = ({
       className="w-full sm:w-40 h-40 object-cover"
       src={image}
       alt={title}
+      width={200}
+      height={200}
     />
     <div className="p-4 flex-1">
       <h2 className="text-xl font-semibold text-gray-900 dark:text-white">

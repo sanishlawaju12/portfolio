@@ -20,6 +20,8 @@ const PopularBlogCard = ({
           src={imageUrl}
           alt={title}
           className="w-full h-16 object-cover transition-transform duration-300 group-hover:scale-105"
+          width={200}
+          height={200}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60">
           <h3 className="text-white text-lg font-semibold truncate">{title}</h3>

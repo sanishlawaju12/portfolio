@@ -18,6 +18,8 @@ const BlogPageCard = ({
       className="w-full h-[200px] sm:h-[200px] md:h-[300px] object-cover"
       src={image}
       alt={title}
+      width={800}
+      height={600}
     />
 
     {/* Content Section */}

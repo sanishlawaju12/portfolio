@@ -16,7 +16,7 @@ async function fetchBlogData(slug: string): Promise<Blog | null> {
     const res = await fetch(apiUrl, { cache: "no-store" });
 
     if (!res.ok) {
-      return null;
+      return null; // If the blog is not found, return null
     }
 
     return res.json();
@@ -36,23 +36,12 @@ export default function BlogDetail() {
     }
   }, [params?.slug]);
 
-  if (!params?.slug) {
-    return <p>Loading...</p>;
+  // If no blog data is available, return nothing (i.e., don't render anything)
+  if (!blogData) {
+    return null;
   }
 
-  if (blogData === null) {
-    return (
-      <div className="flex flex-col items-center px-4 mt-24">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600">
-          Blog Not Found
-        </h1>
-        <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-800 dark:text-white">
-          The blog you're looking for doesn't exist or has been removed.
-        </p>
-      </div>
-    );
-  }
-
+  // Once the data is available, render the blog details
   return (
     <div className="flex flex-col items-center px-4 mt-24">
       <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/3 xl:w-1/2">
