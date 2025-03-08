@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = "nodejs";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { ArrowDownToLine } from "lucide-react";
@@ -232,12 +232,12 @@ export default async function HomePage() {
 
           <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mt-6">
             {/* About Me Section */}
-            <Image
-              className="w-full h-full object-cover"
+            <img
+              className="w-full h-[350px] object-cover"
               src="/arpanakoju.jpg"
               alt="About Me"
-              width={600}
-              height={400}
+              width={500}
+              height={500}
             />
             <div className="p-4">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">

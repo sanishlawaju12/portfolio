@@ -1,7 +1,8 @@
 "use client";
-export const runtime = "edge";
+export const runtime = "nodejs";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 // Define the expected type for blog data
 interface Blog {
@@ -50,10 +51,12 @@ export default function BlogDetail() {
         </h1>
 
         {blogData.image && (
-          <img
+          <Image
             src={blogData.image}
             alt={blogData.title}
             className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-lg mt-4"
+            width={600}
+            height={400}
           />
         )}
 

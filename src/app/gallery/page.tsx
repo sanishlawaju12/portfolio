@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = "nodejs";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 

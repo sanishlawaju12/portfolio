@@ -15,6 +15,7 @@ const BlogPageCard = ({
   <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
     {/* Image Section */}
     <Image
+      priority
       className="w-full h-[200px] sm:h-[200px] md:h-[300px] object-cover"
       src={image}
       alt={title}

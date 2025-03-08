@@ -14,6 +14,7 @@ const BlogCard = ({
 }) => (
   <div className="flex flex-col sm:flex-row bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
     <Image
+      priority
       className="w-full sm:w-40 h-40 object-cover"
       src={image}
       alt={title}
