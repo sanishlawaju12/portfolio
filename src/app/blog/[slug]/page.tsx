@@ -57,8 +57,8 @@ export default function BlogDetail() {
             src={imageUrl}
             alt={blogData.title}
             className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-lg mt-4"
-            width={600}
-            height={400}
+            width={800}
+            height={600}
           />
         )}
 

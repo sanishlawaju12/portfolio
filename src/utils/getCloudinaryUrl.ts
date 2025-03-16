@@ -1,6 +1,6 @@
 export const getCloudinaryUrl = (image?: string): string => {
     const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-    const fallbackImage = "./blog-img.jpg";
+    const fallbackImage = "/blog-img.jpg";
   
     if (!cloudName) {
       console.error("Cloudinary cloud name is not defined in the environment variables.");
