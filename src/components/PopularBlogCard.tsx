@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CldImage } from "next-cloudinary";
 import Image from "next/image";
 
 const PopularBlogCard = ({
@@ -11,12 +12,12 @@ const PopularBlogCard = ({
   image: string;
 }) => {
   const imageUrl = image.startsWith("/media")
-    ? `${process.env.NEXT_PUBLIC_BASE_URL}${image}`
+    ? `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}${image}`
     : image;
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <Link href={`/blog/${slug}`}>
-        <Image
+        <CldImage
           src={imageUrl}
           alt={title}
           className="w-full h-16 object-cover transition-transform duration-300 group-hover:scale-105"
