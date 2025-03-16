@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CldImage } from "next-cloudinary";
+import Image from "next/image";
 
 const PopularBlogCard = ({
   slug,
@@ -10,13 +10,12 @@ const PopularBlogCard = ({
   title: string;
   image: string;
 }) => {
-  const imageUrl = image.startsWith("/media")
-    ? `${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}${image}`
-    : image;
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${image}`;
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <Link href={`/blog/${slug}`}>
-        <CldImage
+        <Image
           src={imageUrl}
           alt={title}
           className="w-full h-16 object-cover transition-transform duration-300 group-hover:scale-105"
