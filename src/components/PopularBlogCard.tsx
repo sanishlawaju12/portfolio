@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { CldImage } from "next-cloudinary";
-import Image from "next/image";
 
 const PopularBlogCard = ({
   slug,
