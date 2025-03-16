@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
 
 const PopularBlogCard = ({
   slug,
@@ -8,10 +9,10 @@ const PopularBlogCard = ({
 }: {
   slug: string;
   title: string;
-  image: string;
+  image?: string;
 }) => {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const imageUrl = `https://res.cloudinary.com/${cloudName}/image/upload/${image}`;
+  const imageUrl = getCloudinaryUrl(image);
+
   return (
     <div className="relative group overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
       <Link href={`/blog/${slug}`}>
@@ -19,10 +20,11 @@ const PopularBlogCard = ({
           src={imageUrl}
           alt={title}
           className="w-full h-16 object-cover transition-transform duration-300 group-hover:scale-105"
-          width={200}
+          width={400}
           height={200}
+          priority
         />
-        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60">
+        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 p-2">
           <h3 className="text-white text-lg font-semibold truncate">{title}</h3>
         </div>
       </Link>

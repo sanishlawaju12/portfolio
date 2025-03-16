@@ -3,6 +3,7 @@ export const runtime = "nodejs";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
 
 // Define the expected type for blog data
 interface Blog {
@@ -42,6 +43,7 @@ export default function BlogDetail() {
     return null;
   }
 
+  const imageUrl = getCloudinaryUrl(blogData.image);
   // Once the data is available, render the blog details
   return (
     <div className="flex flex-col items-center px-4 mt-24">
@@ -50,9 +52,9 @@ export default function BlogDetail() {
           {blogData.title}
         </h1>
 
-        {blogData.image && (
+        {imageUrl && (
           <Image
-            src={blogData.image}
+            src={imageUrl}
             alt={blogData.title}
             className="w-full h-[300px] sm:h-[400px] md:h-[500px] object-cover rounded-lg mt-4"
             width={600}

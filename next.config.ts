@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "portfolio-r21r.onrender.com",
-        pathname: "/media/**",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
       },
     ],
   },

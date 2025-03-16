@@ -52,6 +52,8 @@ export default function GalleryPage() {
                 src={item.image}
                 alt={`Gallery Image ${index + 1}`}
                 className="w-full h-full object-cover"
+                width={600}
+                height={400}
               />
             </div>
           ))}
