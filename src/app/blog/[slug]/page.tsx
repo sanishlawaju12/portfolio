@@ -1,5 +1,6 @@
 "use client";
-export const runtime = "nodejs";
+export const runtime = 'edge';
+// export const runtime = "nodejs";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
