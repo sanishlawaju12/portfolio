@@ -70,7 +70,7 @@ export default function BlogDetail() {
               p: ({ children }) => (
                 <p className="text-base/8 mb-4 text-justify">{children}</p>
               ),
-              img: ({ node, ...props }) => (
+              img: ({ ...props }) => (
                 <img {...props} className="w-full h-[400px] rounded" />
               ),
             }}
