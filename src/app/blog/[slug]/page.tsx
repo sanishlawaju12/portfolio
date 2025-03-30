@@ -67,7 +67,7 @@ export default function BlogDetail() {
         <div className="mt-4 text-base sm:text-lg md:text-xl text-gray-800 dark:text-white leading-relaxed">
           <ReactMarkdown
             components={{
-              p: ({ node, children }) => (
+              p: ({ children }) => (
                 <p className="text-base/8 mb-4 text-justify">{children}</p>
               ),
               img: ({ node, ...props }) => (
