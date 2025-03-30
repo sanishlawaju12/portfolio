@@ -1,9 +1,9 @@
 export const runtime = "nodejs";
 import { Separator } from "@/components/ui/separator";
 import BlogPageCard from "@/components/BlogPageCard";
-import Link from "next/link";
+// import Link from "next/link";
 import PopularBlogCard from "@/components/PopularBlogCard";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 
 async function fetchBlogs() {
   try {
@@ -20,20 +20,20 @@ async function fetchBlogs() {
   }
 }
 
-async function fetchTags() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-tag/`
-    );
-    if (!res.ok) {
-      throw new Error("Failed to fetch blog tags");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching tags:", error);
-    return [];
-  }
-}
+// async function fetchTags() {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-tag/`
+//     );
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch blog tags");
+//     }
+//     return await res.json();
+//   } catch (error) {
+//     console.error("Error fetching tags:", error);
+//     return [];
+//   }
+// }
 
 async function fetchPopularBlogs() {
   try {
@@ -50,26 +50,26 @@ async function fetchPopularBlogs() {
   }
 }
 
-async function fetchCategories() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-category/`
-    );
-    if (!res.ok) {
-      throw new Error("Failed to fetch blog categories");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    return [];
-  }
-}
+// async function fetchCategories() {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/blog-category/`
+//     );
+//     if (!res.ok) {
+//       throw new Error("Failed to fetch blog categories");
+//     }
+//     return await res.json();
+//   } catch (error) {
+//     console.error("Error fetching categories:", error);
+//     return [];
+//   }
+// }
 
 export default async function BlogCategoryPage() {
   const blogs = await fetchBlogs();
   const popularBlogs = await fetchPopularBlogs();
-  const tags = await fetchTags();
-  const categories = await fetchCategories();
+  // const tags = await fetchTags();
+  // const categories = await fetchCategories();
 
   return (
     <div className="flex flex-col items-center px-4 mt-12">
@@ -139,8 +139,9 @@ export default async function BlogCategoryPage() {
               )}
             </div>
           </div>
+
+          {/*
           <div className="flex flex-col mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-            {/* Categories Section */}
             <div className="p-4 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 Categories
@@ -168,9 +169,7 @@ export default async function BlogCategoryPage() {
             </div>
           </div>
 
-          {/* Blog Tag Section */}
           <div className="flex flex-col mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-            {/* Categories Section */}
             <div className="p-4 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 Tags
@@ -195,6 +194,7 @@ export default async function BlogCategoryPage() {
               </div>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>

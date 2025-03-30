@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
+import ReactMarkdown from "react-markdown";
 
 // Define the expected type for blog data
 interface Blog {
@@ -44,11 +45,12 @@ export default function BlogDetail() {
   }
 
   const imageUrl = getCloudinaryUrl(blogData.image);
+
   // Once the data is available, render the blog details
   return (
     <div className="flex flex-col items-center px-4 mt-24">
       <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/3 xl:w-1/2">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
           {blogData.title}
         </h1>
 
@@ -62,9 +64,20 @@ export default function BlogDetail() {
           />
         )}
 
-        <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-800 dark:text-white leading-relaxed">
-          {blogData.body}
-        </p>
+        <div className="mt-4 text-base sm:text-lg md:text-xl text-gray-800 dark:text-white leading-relaxed">
+          <ReactMarkdown
+            components={{
+              p: ({ node, children }) => (
+                <p className="text-base/8 mb-4 text-justify">{children}</p>
+              ),
+              img: ({ node, ...props }) => (
+                <img {...props} className="w-full h-[400px] rounded" />
+              ),
+            }}
+          >
+            {blogData.body}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   );

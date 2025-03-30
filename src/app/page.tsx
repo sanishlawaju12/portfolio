@@ -139,11 +139,11 @@ export default async function HomePage() {
             Recent Blogs
           </span>
         </div>
-        <input
+        {/* <input
           type="text"
           placeholder="Search..."
           className="border rounded-full px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        /> */}
       </div>
       <Separator className="mt-4 sm:w-full md:w-[80%] lg:w-[80%]" />
 
@@ -243,15 +243,26 @@ export default async function HomePage() {
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                 About Me
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-2">
-                Traveling has always been my passion. I love exploring new
-                places, experiencing different cultures, and capturing
-                unforgettable moments along the way. Whether it’s trekking
-                through the mountains, discovering hidden gems in a city, or
-                simply enjoying a quiet sunset by the beach, every journey adds
-                a new story to my life. I believe that travel is not just about
-                visiting places but about embracing new perspectives and making
-                meaningful connections with people around the world.
+              <p className="text-gray-600 text-justify dark:text-gray-300 mt-2">
+                I’m Arpana, a tourism graduate, female trekking guide and
+                passionate traveler. My journey into the world of travel started
+                with my love for exploring new place, understanding diverse
+                cultures, and experiencing the beauty of nature firsthand. Over
+                the years, I’ve had the opportunity to trek through breathtaking
+                landscapes, interact with local communities, and witnessing the
+                transformative power of travel.
+              </p>
+              <p className="text-gray-600 text-justify dark:text-gray-300 mt-2">
+                This page is my space to share those experiences with you.
+                Whether you’re an adventure seeker looking for trekking routes,
+                a cultural enthusiast eager to learn about Nepal’s rich cultural
+                heritage, or a traveler searching for practical guides and
+                travel tips, I hope you’ll find help here.
+              </p>
+              <p className="text-gray-600 text-justify dark:text-gray-300 mt-2">
+                Join me on this journey as I document my travels, share personal
+                stories, and provide tips to help you make the most of your
+                adventures. Let’s explore together.
               </p>
             </div>
           </div>
