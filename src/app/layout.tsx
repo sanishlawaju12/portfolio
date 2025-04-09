@@ -16,7 +16,9 @@ export default function RootLayout({
 
   // Hide navbars on /blog and /gallery pages
   const shouldShowNavbar = !(
-    pathname.startsWith("/blog") || pathname.startsWith("/gallery")
+    pathname.startsWith("/blog") ||
+    pathname.startsWith("/gallery") ||
+    pathname.startsWith("/dashboard")
   );
 
   return (
