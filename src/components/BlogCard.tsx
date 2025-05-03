@@ -20,7 +20,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
         priority
         className="w-full sm:w-40 h-40 object-cover"
         src={imageUrl}
-        alt=""
+        alt={`${blog?.title}`}
         width={800}
         height={600}
       />

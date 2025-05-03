@@ -10,6 +10,8 @@ export interface Blog {
 
 export interface BlogResponse {
   count: number;
+  next: string | null;
+  previous: string | null;
   results: Blog[];
 }
 

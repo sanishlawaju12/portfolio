@@ -20,7 +20,7 @@ import {
 
 export default async function HomePage() {
   const response = await getBlogList();
-  const blogs = response.results;
+  const blogs = response.results.slice(0, 4);
   const data = await getPopularBlogList();
   const populars = data;
 
@@ -170,22 +170,11 @@ export default async function HomePage() {
                 My Popular Blogs
               </span>
             </div>
-            {/* <div className="flex flex-col gap-4">
-              {popularBlogs.map(
-                (popular_blogs: {
-                  slug: string;
-                  title: string;
-                  image: string;
-                }) => (
-                  <PopularBlogCard
-                    key={popular_blogs.slug}
-                    slug={popular_blogs.slug}
-                    title={popular_blogs.title}
-                    image={popular_blogs.image}
-                  />
-                )
-              )}
-            </div> */}
+            <div className="flex flex-col gap-4">
+              {populars.slice(0, 4).map((item: Blog) => (
+                <PopularBlogCard blog={item} key={item.slug} />
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden mt-6">
