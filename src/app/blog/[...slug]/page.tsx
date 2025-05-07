@@ -3,16 +3,13 @@ export const runtime = "edge";
 // import { useParams } from "next/navigation";
 import Image from "next/image";
 import React from "react";
-import createDOMPurify from "dompurify";
 import { BlogDetailPost } from "@/types/blog";
 import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
-import ReactMarkdown from "react-markdown";
-import { addPaddingToList } from "@/lib/utils";
 
 interface BlogDetailSlugProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{
+    slug: string[];
+  }>;
 }
 
 async function getBlogDetail(slug: string): Promise<BlogDetailPost> {
@@ -29,7 +26,9 @@ async function getBlogDetail(slug: string): Promise<BlogDetailPost> {
 }
 
 const BlogDetailSlugPage = async ({ params }: BlogDetailSlugProps) => {
-  const item = await getBlogDetail(params.slug);
+  const { slug } = await params;
+  const slugPath = slug.join("/");
+  const item = await getBlogDetail(slugPath);
   const imageUrl = getCloudinaryUrl(item.image);
   // const DOMPurifyInstance =
   //   typeof window !== "undefined"

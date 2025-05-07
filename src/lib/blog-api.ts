@@ -16,6 +16,7 @@ async function fetchData<T>(url: string): Promise<T> {
         }
         return await response.json();
     } catch (error) {
+        console.log("Error fetching data:", error);
         throw new Error("Failed to fetch data. Please try again later.");
     }
 }

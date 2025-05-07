@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import BlogPageCard from "@/components/BlogPageCard";
 // import Link from "next/link";
 import PopularBlogCard from "@/components/PopularBlogCard";
+import { Blog } from "@/types/blog";
 // import { Badge } from "@/components/ui/badge";
 
 async function fetchBlogs() {
@@ -67,7 +68,7 @@ async function fetchPopularBlogs() {
 // }
 
 export default async function BlogCategoryPage() {
-  const blogs = await fetchBlogs();
+  const blogsData = await fetchBlogs();
   const popularBlogs = await fetchPopularBlogs();
   // const tags = await fetchTags();
   // const categories = await fetchCategories();
@@ -95,23 +96,9 @@ export default async function BlogCategoryPage() {
         <div className="w-full lg:w-[70%]">
           <div className="flex flex-col gap-2">
             {/* Use the BlogCard Component here */}
-            {blogs.map(
-              (blog: {
-                id: number;
-                slug: string;
-                title: string;
-                excerpt: string;
-                image: string;
-              }) => (
-                <BlogPageCard
-                  key={blog.slug}
-                  slug={blog.slug}
-                  title={blog.title}
-                  excerpt={blog.excerpt}
-                  image={blog.image}
+                <BlogPageCard blogs={blogsData}
                 />
-              )
-            )}
+              
           </div>
         </div>
 
@@ -124,18 +111,12 @@ export default async function BlogCategoryPage() {
               </span>
             </div>
             <div className="flex flex-col px-4 pb-4 gap-4">
-              {popularBlogs.map(
-                (popular_blogs: {
-                  slug: string;
-                  title: string;
-                  image: string;
-                }) => (
-                  <PopularBlogCard
-                    key={popular_blogs.slug}
-                    slug={popular_blogs.slug}
-                    title={popular_blogs.title}
-                    image={popular_blogs.image}
+              {popularBlogs.map((popularBlog: Blog) => (
+                  <div key={popularBlog.slug}>
+                    <PopularBlogCard
+                    blog={popularBlog}
                   />
+                  </div>
                 )
               )}
             </div>

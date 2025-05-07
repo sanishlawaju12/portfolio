@@ -8,7 +8,7 @@ interface BlogPageCardProps {
   blogs: Blog[];
 }
 
-export default function BlogPageCard({ blogs = [] }: BlogPageCardProps) {
+export default function BlogPageCard({ blogs }: BlogPageCardProps) {
   if (!blogs || blogs.length === 0) {
     return <p>No blogs found.</p>;
   }
