@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownToLine } from "lucide-react";
 import { CiLinkedin, CiInstagram, CiFacebook, CiYoutube } from "react-icons/ci";
 import Link from "next/link";
+import { getPopularBlogList, getBlogList } from "@/lib/blog-api";
+import { Blog } from "@/types/blog";
 import BlogCard from "@/components/BlogCard";
 import PopularBlogCard from "@/components/PopularBlogCard";
 import * as React from "react";
@@ -16,39 +18,11 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
-async function getBlogs() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/`
-    );
-    if (!res.ok) {
-      throw new Error("Failed to get blogs");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    return [];
-  }
-}
-
-async function getPopularBlogs() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/popular`
-    );
-    if (!res.ok) {
-      throw new Error("Failed to fetch popular blog");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error fetching popular blogs:", error);
-    return [];
-  }
-}
-
 export default async function HomePage() {
-  const blogs = await getBlogs();
-  const popularBlogs = await getPopularBlogs();
+  const response = await getBlogList();
+  const blogs = response.results.slice(0, 4);
+  const data = await getPopularBlogList();
+  const populars = data;
 
   const Gallery = [
     {
@@ -152,23 +126,7 @@ export default async function HomePage() {
         <div className="w-full lg:w-[70%]">
           <div className="flex flex-col gap-2">
             {/* Use the BlogCard Component here */}
-            {blogs.map(
-              (blog: {
-                id: number;
-                slug: string;
-                title: string;
-                excerpt: string;
-                image: string;
-              }) => (
-                <BlogCard
-                  key={blog.slug}
-                  slug={blog.slug}
-                  title={blog.title}
-                  excerpt={blog.excerpt}
-                  image={blog.image}
-                />
-              )
-            )}
+            <BlogCard blog={blogs[0]} />
           </div>
 
           {/* Gallery Section */}
@@ -213,20 +171,9 @@ export default async function HomePage() {
               </span>
             </div>
             <div className="flex flex-col gap-4">
-              {popularBlogs.map(
-                (popular_blogs: {
-                  slug: string;
-                  title: string;
-                  image: string;
-                }) => (
-                  <PopularBlogCard
-                    key={popular_blogs.slug}
-                    slug={popular_blogs.slug}
-                    title={popular_blogs.title}
-                    image={popular_blogs.image}
-                  />
-                )
-              )}
+              {populars.slice(0, 4).map((item: Blog) => (
+                <PopularBlogCard blog={item} key={item.slug} />
+              ))}
             </div>
           </div>
 
