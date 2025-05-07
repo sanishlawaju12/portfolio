@@ -13,7 +13,7 @@ interface BlogDetailSlugProps {
 }
 
 async function getBlogDetail(slug: string): Promise<BlogDetailPost> {
-  const apiUrl = `${process.env.BASE_URL}/api/v1/blogs/${slug}/`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blogs/${slug}/`;
   const res = await fetch(apiUrl, {
     method: "GET",
     headers: {
