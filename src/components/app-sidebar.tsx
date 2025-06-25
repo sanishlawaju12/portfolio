@@ -2,13 +2,7 @@
 
 import * as React from "react";
 import {
-  BookOpen,
-  Bot,
-  Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
   SquareTerminal,
 } from "lucide-react";
 
