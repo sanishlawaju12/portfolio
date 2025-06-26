@@ -1,10 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  GalleryVerticalEnd,
-  SquareTerminal,
-} from "lucide-react";
+import { GalleryVerticalEnd, SquareTerminal } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -40,19 +37,19 @@ const data = {
       items: [
         {
           title: "Overview",
-          url: "#",
+          url: "/dashboard/blogs",
         },
         {
           title: "All Blogs",
-          url: "#",
+          url: "/dashboard/blogs/all-blogs",
         },
         {
           title: "Blog Category",
-          url: "#",
+          url: "/dashboard/blogs/blog-category",
         },
         {
           title: "Blog Tags",
-          url: "#",
+          url: "/dashboard/blogs/blog-tags",
         },
       ],
     },
