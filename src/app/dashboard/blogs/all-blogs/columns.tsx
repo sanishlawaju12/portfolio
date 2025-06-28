@@ -31,6 +31,14 @@ export const columns: ColumnDef<Blog>[] = [
   {
     accessorKey: "category",
     header: "Category",
+    cell: ({ row }) => {
+      const category = row.original;
+      return (
+        <div>
+          {category.category ? category.category.name : "Uncategorized"}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "created_at",
