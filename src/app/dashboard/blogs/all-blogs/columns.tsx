@@ -1,9 +1,23 @@
 // src/app/dashboard/blogs/all-blogs/columns.tsx
 import type { Blog } from "@/types/blog"; // your centralized Blog type
+import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
 
 import { ColumnDef } from "@tanstack/react-table";
 
+import Image from "next/image";
+
 export const columns: ColumnDef<Blog>[] = [
+  {
+    accessorKey: "image",
+    header: "Blog Image",
+    cell: ({ row }) => {
+      const data = row.original;
+      const imageUrl = getCloudinaryUrl(data?.image);
+      return (
+        <Image src={imageUrl} alt={`${data?.title}`} height={100} width={100} />
+      );
+    },
+  },
   {
     accessorKey: "title",
     header: "Title",
