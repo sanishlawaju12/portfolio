@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, use } from "react";
 import { Button } from "@/components/ui/button";
 import { MoreVertical } from "lucide-react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -43,16 +44,15 @@ import {
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { BlogList, BlogListResponse } from "@/types/blog";
+import { Blog, BlogList, BlogListResponse } from "@/types/blog";
 import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
+import BlogForm from "./blog-form";
 
 export type BlogListProps = {
   blogs?: BlogList[];
 };
 
-export default function BlogListTable({
-  blogs,
-}: BlogListProps) {
+export default function BlogListTable({ blogs }: BlogListProps) {
   const [isMounted, setIsMounted] = useState(false);
   const searchParams = useSearchParams();
 
@@ -60,6 +60,7 @@ export default function BlogListTable({
     setIsMounted(true);
   }, []);
 
+  const queryClient = useQueryClient();
   const blogss = Array.isArray(blogs) && blogs.length > 0 ? blogs : [];
 
   const columns = useMemo<ColumnDef<BlogList>[]>(
@@ -83,7 +84,7 @@ export default function BlogListTable({
               </div>
             </div>
           );
-        }
+        },
       },
       {
         accessorKey: "title",
@@ -151,51 +152,51 @@ export default function BlogListTable({
         },
       },
       {
-      accessorKey: "actions",
-      header: () => <div className="text-left">Action</div>,
-      size: 100,
-      id: "actions",
-      cell: ({ row }) => {
-        const data = row.original;
+        accessorKey: "actions",
+        header: () => <div className="text-left">Action</div>,
+        size: 100,
+        id: "actions",
+        cell: ({ row }) => {
+          const data = row.original;
 
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link
-                  href={`blogs/${data.id}`}
-                  className="flex items-center cursor-pointer"
-                >
-                  View Blog
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
-                <div onClick={(e) => e.stopPropagation()}>
-                  <RosterForm
-                    key={`roster-form-${data.id}-${data.title}-${
-                      data.created_at || Date.now()
-                    }`}
-                    buttonText="Save"
-                    roster={data as Roster}
-                    rosterId={data.id}
-                    borderStyle={"text-black p-0 hover:none font-normal h-6"}
-                    onSuccess={handleUpdateSuccess}
-                  />
-                </div>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreVertical className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link
+                    href={`blogs/${data.id}`}
+                    className="flex items-center cursor-pointer"
+                  >
+                    View Blog
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <BlogForm
+                      key={`blog-form-${data.id}-${data.title}-${
+                        data.created_at || Date.now()
+                      }`}
+                      buttonText="Save"
+                      blog={data as Blog}
+                      blogId={data.id}
+                      borderStyle={"text-black p-0 hover:none font-normal h-6"}
+                      onSuccess={handleUpdateSuccess}
+                    />
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          );
+        },
       },
-    },
     ],
     []
   );
@@ -212,6 +213,14 @@ export default function BlogListTable({
   });
 
   const isNoData = blogss.length === 0;
+
+  const handleUpdateSuccess = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["blogData", blog.id?.toString()],
+    });
+
+    onSuccess?.();
+  };
 
   return (
     <div>

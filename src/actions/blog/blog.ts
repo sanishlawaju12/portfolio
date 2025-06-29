@@ -22,7 +22,7 @@ export async function createBlog(
 		if (!response.ok) {
 			throw await response.json();
 		}
-		revalidatePath("/employer/roster/");
+		revalidatePath("/blog/");
 		const result = await response.json();
 		return { message: result };
 	} catch (error) {
@@ -48,7 +48,7 @@ export async function updateBlog(
   if (!response.ok) {
     throw await response.json();
   }
-  revalidatePath("/blogs/");
+  revalidatePath("/blog/");
   const result = await response.json();
   return { message: result };
 } catch (error) {

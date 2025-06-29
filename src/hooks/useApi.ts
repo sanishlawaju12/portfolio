@@ -25,7 +25,8 @@ export async function fetchApi<T>({
 	try {
 		const response = await fetch(
 			// `${process.env.NEXT_PUBLIC_API_URL}/api/v1/${endpoint}`,
-			`http://192.168.100.81:8001/api/v1/${endpoint}`,
+			// `http://192.168.100.81:8001/api/v1/${endpoint}`,
+			`http://192.168.1.73:8000/api/v1/${endpoint}`,
 			{
 				method,
 				headers,
