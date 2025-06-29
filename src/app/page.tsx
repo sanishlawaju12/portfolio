@@ -49,7 +49,7 @@ export default async function HomePage() {
     <div className="flex flex-col items-center px-4">
       <div className="text-center">
         <h1 className="text-[4rem] font-extrabold text-red-500">
-          <span className="text-cyan-500">अर्पना</span> कोजु
+          {/* <span className="text-cyan-500">अर्पना</span> कोजु */}
         </h1>
         <div className="flex gap-3 justify-center items-center">
           <Link
@@ -181,7 +181,7 @@ export default async function HomePage() {
             {/* About Me Section */}
             <img
               className="w-full h-[350px] object-cover"
-              src="/arpanakoju.jpg"
+              src="/arpanakojuu.jpg"
               alt="About Me"
               width={500}
               height={500}

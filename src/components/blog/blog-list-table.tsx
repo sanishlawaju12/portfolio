@@ -1,6 +1,9 @@
 "use client";
 
 import { useState, useEffect, useMemo, use } from "react";
+import { Button } from "@/components/ui/button";
+import { MoreVertical } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -29,26 +32,29 @@ import {
   useReactTable,
   getPaginationRowModel,
 } from "@tanstack/react-table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { BlogList, BlogListResponse } from "@/types/blog";
+import { getCloudinaryUrl } from "@/utils/getCloudinaryUrl";
 
 export type BlogListProps = {
   blogs?: BlogList[];
-  totalPageCount: number;
 };
 
 export default function BlogListTable({
   blogs,
-  totalPageCount = 0,
 }: BlogListProps) {
-  const pageCount = blogs?.length || 0;
   const [isMounted, setIsMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState("all");
   const searchParams = useSearchParams();
-  const limit = searchParams.get("limit") ?? "10";
-  const offset = searchParams.get("offset") ?? "1";
 
   useEffect(() => {
     setIsMounted(true);
@@ -59,7 +65,28 @@ export default function BlogListTable({
   const columns = useMemo<ColumnDef<BlogList>[]>(
     () => [
       {
-        accessorKey: "blog",
+        accessorKey: "image",
+        header: () => <div className="whitespace-nowrap">Blog Image</div>,
+        cell: ({ row }) => {
+          const blog = row.original;
+          const imageUrl = getCloudinaryUrl(blog?.image);
+          return (
+            <div className="flex items-center gap-3 text-[#4D4D4D] text-nowrap">
+              <div>
+                <Image
+                  src={imageUrl}
+                  alt={blog?.title || "Blog Image"}
+                  width={50}
+                  height={50}
+                  className="rounded"
+                />
+              </div>
+            </div>
+          );
+        }
+      },
+      {
+        accessorKey: "title",
         header: () => <div className="whitespace-nowrap">Title</div>,
         cell: ({ row }) => {
           const blog = row.original;
@@ -91,21 +118,84 @@ export default function BlogListTable({
         },
       },
       {
-        accessorKey: "created_at",
-        header: () => <div className="whitespace-nowrap">Created At</div>,
+        accessorKey: "category",
+        header: () => <div className="whitespace-nowrap">Category</div>,
         cell: ({ row }) => {
           const blog = row.original;
           return (
             <div className="flex items-center gap-3 text-[#4D4D4D] text-nowrap">
               <div>
                 <div className="flex items-center gap-1">
-                  <p className="font-medium text-sm">{blog?.created_at}</p>
+                  <p className="font-medium text-sm">{blog?.category?.name}</p>
                 </div>
               </div>
             </div>
           );
         },
       },
+      {
+        accessorKey: "created_at",
+        header: () => <div className="whitespace-nowrap">Created At</div>,
+        cell: ({ row }) => {
+          const blog = row.original;
+          const dateOnly = blog.created_at?.split("T")[0] ?? "";
+          return (
+            <div className="flex items-center gap-3 text-[#4D4D4D] text-nowrap">
+              <div>
+                <div className="flex items-center gap-1">
+                  <p className="font-medium text-sm">{dateOnly}</p>
+                </div>
+              </div>
+            </div>
+          );
+        },
+      },
+      {
+      accessorKey: "actions",
+      header: () => <div className="text-left">Action</div>,
+      size: 100,
+      id: "actions",
+      cell: ({ row }) => {
+        const data = row.original;
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link
+                  href={`blogs/${data.id}`}
+                  className="flex items-center cursor-pointer"
+                >
+                  View Blog
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
+                <div onClick={(e) => e.stopPropagation()}>
+                  <RosterForm
+                    key={`roster-form-${data.id}-${data.title}-${
+                      data.created_at || Date.now()
+                    }`}
+                    buttonText="Save"
+                    roster={data as Roster}
+                    rosterId={data.id}
+                    borderStyle={"text-black p-0 hover:none font-normal h-6"}
+                    onSuccess={handleUpdateSuccess}
+                  />
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
     ],
     []
   );
