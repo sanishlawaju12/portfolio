@@ -25,7 +25,7 @@ export const BlogSchema = z.object({
     }),
 
   status: z.enum(
-    ["Draft", "Published", "Archived"] as const,
+    ["Draft", "Pending", "Denied", "Published", "Scheduled", "Expired"] as const,
   ),
 
   posted_at: z

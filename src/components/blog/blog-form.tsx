@@ -37,7 +37,7 @@ import { Icons } from "@/components/icons";
 
 interface BlogProps {
   blog?: z.infer<typeof BlogSchema>;
-  blogId?: number;
+  blogSlug?: string;
   buttonText?: string;
   borderStyle?: string;
   onSuccess?: () => void;
@@ -45,7 +45,7 @@ interface BlogProps {
 
 export default function BlogForm({
   blog: values,
-  blogId,
+  blogSlug,
   buttonText = "Add Blog",
   borderStyle = "text-primary hover:bg-primary-500 border-none",
   onSuccess,
@@ -75,7 +75,7 @@ export default function BlogForm({
 
   async function onSubmit(data: z.infer<typeof BlogSchema>) {
     try {
-      const action = blogId ? updateBlog(data, blogId) : createBlog(data);
+      const action = blogSlug ? updateBlog(data, blogSlug) : createBlog(data);
       const result = await action;
 
       if (result.error) {
@@ -89,7 +89,7 @@ export default function BlogForm({
         toast.error("There were validation errors.");
       } else {
         toast.success(
-          blogId ? "Blog updated successfully!" : "Blog created successfully!"
+          blogSlug ? "Blog updated successfully!" : "Blog created successfully!"
         );
         setIsOpen(false);
         if (onSuccess) onSuccess();
@@ -102,7 +102,7 @@ export default function BlogForm({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        {blogId ? (
+        {blogSlug ? (
           <Button
             variant="ghost"
             className={`text-sm p-3 h-8 ${borderStyle} rounded-lg`}

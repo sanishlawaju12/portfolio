@@ -32,10 +32,10 @@ export async function createBlog(
 
 export async function updateBlog(
   values: z.infer<typeof BlogSchema>,
-  id: number
+  slug: string
 ) {
   try {
-  const url = `${process.env.BASE_URL}/api/v1/blogs/${id}/`;
+  const url = `${process.env.BASE_URL}/api/v1/blogs/${slug}/`;
 
   const response = await fetch(url, {
     method: "PATCH",
@@ -57,10 +57,10 @@ export async function updateBlog(
 }
 
 export async function deleteBlog(
-  id: string
+  slug: string
 ) {
   try {
-  const url = `${process.env.BASE_URL}/api/v1/blogs/${id}/`;
+  const url = `${process.env.BASE_URL}/api/v1/blogs/${slug}/`;
 
   const response = await fetch(url, {
     method: "DELETE",

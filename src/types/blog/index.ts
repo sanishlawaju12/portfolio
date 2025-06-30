@@ -45,7 +45,7 @@ export type BlogList = {
   title: string;
   scheduled_for: string;
   deadline: string;
-  status: string;
+  status: "Draft" | "Pending" | "Denied" | "Published" | "Scheduled" | "Expired";
   view_count: number;
   posted_at: string;
   category: {

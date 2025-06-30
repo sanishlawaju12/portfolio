@@ -172,7 +172,7 @@ export default function BlogListTable({ blogs }: BlogListProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <Link
-                    href={`blogs/${data.id}`}
+                    href={`blogs/${data.slug}`}
                     className="flex items-center cursor-pointer"
                   >
                     View Blog
@@ -185,8 +185,8 @@ export default function BlogListTable({ blogs }: BlogListProps) {
                         data.created_at || Date.now()
                       }`}
                       buttonText="Save"
-                      blog={data as Blog}
-                      blogId={data.id}
+                      blog={data as BlogList}
+                      blogSlug={data.slug}
                       borderStyle={"text-black p-0 hover:none font-normal h-6"}
                       onSuccess={handleUpdateSuccess}
                     />
@@ -216,10 +216,8 @@ export default function BlogListTable({ blogs }: BlogListProps) {
 
   const handleUpdateSuccess = () => {
     queryClient.invalidateQueries({
-      queryKey: ["blogData", blog.id?.toString()],
+      queryKey: ["blogData"],
     });
-
-    onSuccess?.();
   };
 
   return (
