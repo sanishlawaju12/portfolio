@@ -11,7 +11,6 @@ export const BlogSchema = z.object({
 
   title: z.string().nonempty("Title is required"),
 
-  // If you’re on Zod ≥3.21 you can use .datetime(), otherwise refine:
   scheduled_for: z
     .string()
     .refine((val) => !isNaN(Date.parse(val)), {
@@ -27,12 +26,6 @@ export const BlogSchema = z.object({
   status: z.enum(
     ["Draft", "Pending", "Denied", "Published", "Scheduled", "Expired"] as const,
   ),
-
-  posted_at: z
-    .string()
-    .refine((val) => !isNaN(Date.parse(val)), {
-      message: "posted_at must be a valid ISO date string",
-    }),
 
   category: CategorySchema,
 });

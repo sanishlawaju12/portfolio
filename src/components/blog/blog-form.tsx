@@ -60,7 +60,6 @@ export default function BlogForm({
       scheduled_for: "",
       deadline: "",
       status: "Draft",
-      posted_at: "",
       category: {
         name: "",
       },
@@ -188,22 +187,6 @@ export default function BlogForm({
                   <FormItem>
                     <FormLabel>
                       Deadline <span className="text-red-700">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input type="datetime-local" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="posted_at"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Posted At <span className="text-red-700">*</span>
                     </FormLabel>
                     <FormControl>
                       <Input type="datetime-local" {...field} />

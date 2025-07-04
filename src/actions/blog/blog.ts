@@ -45,6 +45,7 @@ export async function updateBlog(
     },
     body: JSON.stringify(values),
   });
+  console.log(response, 'response data')
   if (!response.ok) {
     throw await response.json();
   }

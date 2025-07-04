@@ -103,22 +103,6 @@ export default function BlogListTable({ blogs }: BlogListProps) {
         },
       },
       {
-        accessorKey: "excerpt",
-        header: () => <div className="whitespace-nowrap">Excerpt</div>,
-        cell: ({ row }) => {
-          const blog = row.original;
-          return (
-            <div className="flex items-center gap-3 text-[#4D4D4D] text-nowrap">
-              <div>
-                <div className="flex items-center gap-1">
-                  <p className="font-medium text-sm">{blog?.excerpt}</p>
-                </div>
-              </div>
-            </div>
-          );
-        },
-      },
-      {
         accessorKey: "category",
         header: () => <div className="whitespace-nowrap">Category</div>,
         cell: ({ row }) => {
@@ -152,6 +136,22 @@ export default function BlogListTable({ blogs }: BlogListProps) {
         },
       },
       {
+        accessorKey: "views",
+        header: () => <div className="whitespace-nowrap">Views</div>,
+        cell: ({ row }) => {
+          const blog = row.original;
+          return (
+            <div className="flex items-center gap-3 text-[#4D4D4D] text-nowrap">
+              <div>
+                <div className="flex items-center gap-1">
+                  <p className="font-medium text-sm">{blog?.view_count}</p>
+                </div>
+              </div>
+            </div>
+          );
+        },
+      },
+      {
         accessorKey: "actions",
         header: () => <div className="text-left">Action</div>,
         size: 100,
@@ -172,7 +172,7 @@ export default function BlogListTable({ blogs }: BlogListProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <Link
-                    href={`blogs/${data.slug}`}
+                    href={`/blog/${data.slug}`}
                     className="flex items-center cursor-pointer"
                   >
                     View Blog
@@ -187,7 +187,7 @@ export default function BlogListTable({ blogs }: BlogListProps) {
                       buttonText="Save"
                       blog={data as BlogList}
                       blogSlug={data.slug}
-                      borderStyle={"text-black p-0 hover:none font-normal h-6"}
+                      borderStyle={"text-white p-0 hover:none font-normal h-6"}
                       onSuccess={handleUpdateSuccess}
                     />
                   </div>
@@ -216,7 +216,7 @@ export default function BlogListTable({ blogs }: BlogListProps) {
 
   const handleUpdateSuccess = () => {
     queryClient.invalidateQueries({
-      queryKey: ["blogData"],
+      queryKey: ["blogs"],
     });
   };
 
