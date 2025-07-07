@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 import { BlogSchema } from "@/schema/blog";
 import { createBlog, updateBlog } from "@/actions/blog/blog";
+
 import {
   Dialog,
   DialogContent,
@@ -55,14 +56,19 @@ export default function BlogForm({
   const form = useForm<z.infer<typeof BlogSchema>>({
     resolver: zodResolver(BlogSchema),
     defaultValues: values ?? {
-      title: "",
-      excerpt: "",
       scheduled_for: "",
+      title: "",
+      image: { file: undefined as unknown as File },
+      excerpt: "",
+      body: "",
       deadline: "",
-      status: "Draft",
       category: {
         name: "",
       },
+      tags: {
+        name: "",
+      },
+      status: "Draft",
     },
   });
 
@@ -74,8 +80,15 @@ export default function BlogForm({
 
   async function onSubmit(data: z.infer<typeof BlogSchema>) {
     try {
-      const action = blogSlug ? updateBlog(data, blogSlug) : createBlog(data);
-      const result = await action;
+      let result;
+
+      if (blogSlug) {
+        // Editing existing blog (PATCH)
+        result = await updateBlog(data, blogSlug);
+      } else {
+        // Creating new blog (POST)
+        result = await createBlog(data);
+      }
 
       if (result.error) {
         const errorObj = result.error as Record<string, string>;
@@ -91,7 +104,7 @@ export default function BlogForm({
           blogSlug ? "Blog updated successfully!" : "Blog created successfully!"
         );
         setIsOpen(false);
-        if (onSuccess) onSuccess();
+        onSuccess?.();
       }
     } catch (error) {
       toast.error("Something went wrong while saving the blog.");
@@ -104,7 +117,7 @@ export default function BlogForm({
         {blogSlug ? (
           <Button
             variant="ghost"
-            className={`text-sm p-3 h-8 ${borderStyle} rounded-lg`}
+            className={`text-black p-3 h-8 ${borderStyle} rounded-lg`}
           >
             Edit / Update
           </Button>
@@ -132,6 +145,22 @@ export default function BlogForm({
         <div className="h-full max-h-[100vh] overflow-y-auto no-scrollbar p-1">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="scheduled_for"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Scheduled For <span className="text-red-700">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input type="datetime-local" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <FormField
                 control={form.control}
                 name="title"
@@ -166,14 +195,23 @@ export default function BlogForm({
 
               <FormField
                 control={form.control}
-                name="scheduled_for"
-                render={({ field }) => (
+                name="image.file"
+                render={({ field: { onChange, ...rest } }) => (
                   <FormItem>
                     <FormLabel>
-                      Scheduled For <span className="text-red-700">*</span>
+                      Upload Image <span className="text-red-700">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input type="datetime-local" {...field} />
+                      <Input
+                        type="file"
+                        accept="image/png, image/jpeg, application/pdf"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            onChange(file);
+                          }
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -215,7 +253,10 @@ export default function BlogForm({
                         <SelectContent>
                           <SelectItem value="Draft">Draft</SelectItem>
                           <SelectItem value="Published">Published</SelectItem>
-                          <SelectItem value="Archived">Archived</SelectItem>
+                          <SelectItem value="Scheduled">Scheduled</SelectItem>
+                          <SelectItem value="Pending">Pending</SelectItem>
+                          <SelectItem value="Denied">Denied</SelectItem>
+                          <SelectItem value="Expired">Expired</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
