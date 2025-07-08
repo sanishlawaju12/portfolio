@@ -54,7 +54,7 @@ export type BlogList = {
     slug: string;
   },
   tags: {
-    id: string;
+    id?: string;
     name: string;
     slug: string;
   };

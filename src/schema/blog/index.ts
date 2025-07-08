@@ -5,11 +5,15 @@ export const CategorySchema = z.object({
   name: z.string().nonempty("Category name is required"),
 });
 
+export const TagSchema = z.object({
+  name: z.string().nonempty("Tag is required.")
+})
+
 // Main blog payload schema
 export const BlogSchema = z.object({
-  excerpt: z.string().nonempty("Excerpt is required"),
-
   title: z.string().nonempty("Title is required"),
+  excerpt: z.string().nonempty("Excerpt is required"),
+  body: z.string().optional(),
 
   scheduled_for: z
     .string()
@@ -28,4 +32,14 @@ export const BlogSchema = z.object({
   ),
 
   category: CategorySchema,
+  tags: TagSchema,
+
+  // image: z
+  // .union([z.string(), z.instanceof(File)])
+  // .refine((val) => {
+  //   if (typeof val === "string") return true;
+  //   return ["image/jpeg", "image/png", "image/bmp", "image/tiff"].includes(val.type);
+  // }, { message: "Only image files are allowed" }),
+
+  // tags: z.array(z.object({ name: z.string().optional() })).optional(),  
 });

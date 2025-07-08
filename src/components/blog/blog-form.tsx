@@ -54,16 +54,33 @@ export default function BlogForm({
 
   const form = useForm<z.infer<typeof BlogSchema>>({
     resolver: zodResolver(BlogSchema),
-    defaultValues: values ?? {
-      title: "",
-      excerpt: "",
-      scheduled_for: "",
-      deadline: "",
-      status: "Draft",
-      category: {
-        name: "",
-      },
-    },
+    defaultValues: values
+      ? {
+          ...values,
+          category: {
+            name: values.category.name || "",
+          },
+          tags: {
+            name: values.tags.name || "",
+          },
+          // tags: values.tags || ([] as { name?: string }[]),
+          // image: values.image ?? "",
+        }
+      : {
+          title: "",
+          excerpt: "",
+          scheduled_for: "",
+          deadline: "",
+          status: "Draft",
+          category: {
+            name: "",
+          },
+          tags: {
+            name: "",
+          },
+          // tags: [] as { name?: string }[],
+          // image: "",
+        },
   });
 
   const { formState, reset } = form;
@@ -134,6 +151,22 @@ export default function BlogForm({
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
+                name="scheduled_for"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Scheduled For <span className="text-red-700">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input type="datetime-local" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="title"
                 render={({ field }) => (
                   <FormItem>
@@ -164,16 +197,68 @@ export default function BlogForm({
                 )}
               />
 
+              {/* <FormField
+                control={form.control}
+                name="image"
+                render={({ field: { value, onChange, ...rest } }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Upload Image <span className="text-red-700">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <>
+                        {typeof value === "string" && value && (
+                          <div className="mb-2">
+                            <img
+                              src={value}
+                              alt="Current"
+                              className="h-24 w-24 object-cover rounded"
+                            />
+                          </div>
+                        )}
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            if (e.target.files?.[0]) {
+                              onChange(e.target.files[0]);
+                            }
+                          }}
+                          {...rest}
+                        />
+                      </>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              /> */}
+
               <FormField
                 control={form.control}
-                name="scheduled_for"
+                name="category.name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      Scheduled For <span className="text-red-700">*</span>
+                      Category Name <span className="text-red-700">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input type="datetime-local" {...field} />
+                      <Input placeholder="Enter category name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="tags.name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Tag <span className="text-red-700">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter tags" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -215,25 +300,9 @@ export default function BlogForm({
                         <SelectContent>
                           <SelectItem value="Draft">Draft</SelectItem>
                           <SelectItem value="Published">Published</SelectItem>
-                          <SelectItem value="Archived">Archived</SelectItem>
+                          <SelectItem value="Scheduled">Scheduled</SelectItem>
                         </SelectContent>
                       </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="category.name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>
-                      Category Name <span className="text-red-700">*</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter category name" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
