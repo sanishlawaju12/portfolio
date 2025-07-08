@@ -184,10 +184,10 @@ export default function BlogListTable({ blogs }: BlogListProps) {
                       key={`blog-form-${data.id}-${data.title}-${
                         data.created_at || Date.now()
                       }`}
-                      buttonText="Save"
+                      buttonText="Edit"
                       blog={data as BlogList}
                       blogSlug={data.slug}
-                      borderStyle={"text-white p-0 hover:none font-normal h-6"}
+                      borderStyle={"text-black p-0 hover:none font-normal h-6"}
                       onSuccess={handleUpdateSuccess}
                     />
                   </div>
@@ -216,7 +216,7 @@ export default function BlogListTable({ blogs }: BlogListProps) {
 
   const handleUpdateSuccess = () => {
     queryClient.invalidateQueries({
-      queryKey: ["blogs"],
+      queryKey: ["blogss"],
     });
   };
 
