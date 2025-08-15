@@ -36,4 +36,5 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 
+![YOLO](https://img.shields.io/badge/YOLO-%F0%9F%92%80-orange?style=for-the-badge)
 
